@@ -1,37 +1,49 @@
 function Login(){
-    let obj = {
-        first: "",
-        last:"",
-        address:"",
-        email:"",
-        age:"",
-    };
-    // fetch("http://a6b5-103-156-19-229.ngrok.io/getDetails",{
-    //     method:"GET",
-    // })
-    //     .then((response) => response.json())
-    //     .then((responseData)=>{
-    //         document.getElementById("firstName").value = responseData[0].username;
-    //         document.getElementById("lastName").value = responseData[0].username;
-    //         document.getElementById("address").value = responseData[0].id;
-    //         document.getElementById("contactNo").value = responseData[0].role;
-    //         document.getElementById("age").value = responseData[0].id;
-    //     })
     function saveInfo(){
-        let username = document.getElementById("username").value
-        if(username == '' || username == ' ')
+        let obj = {
+            email:"",
+            password:"",
+        };
+        let usrname = document.getElementById("username").value
+        if(usrname == '' || usrname == ' ')
         {
             alert("Invalid username!!!");
             return;
         }
-        let password = document.getElementById("password").value
-        if(password == '' || password == ' ')
+        let psswd = document.getElementById("password").value
+        if(psswd == '' || psswd == ' ')
         {
             alert("Invalid password.Try again!!!");
             return;
         }
-        console.log(username);
-        console.log(password);
+        obj.email = usrname;
+        obj.password = psswd;
+        fetch("http://localhost:5050/student/login",{
+            method:"POST",
+            body: JSON.stringify(obj),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            }
+        })
+            .then((response)=>{
+                if(response.status == 200)
+                {
+                    return response.json();
+                }
+                else
+                {
+                    console.clear();
+                    alert("Invalid Credentials!!!");
+                    return -1;
+                }
+            })
+            .then(function(data){
+                if(data!=-1)
+                {
+                    console.log(data);
+                    window.location.href="/dashboard";
+                }
+            })
     }
     function signUp(){
         window.location.href="/signup";
@@ -47,7 +59,7 @@ function Login(){
                         <span>
                             STUDENT TRAVEL CONNECT
                         </span>
-                <span>
+                        <span>
                     <button id-type="button" className="btn btn-success" style={{backgroundColor:"white",color:"black"}}>Logout</button>
                 </span>
                     </div>
@@ -61,15 +73,15 @@ function Login(){
                         </div>
                         <div style={{marginTop:"20px",textAlign:"left"}}>
                             <label>Email Id</label>
-                                <input type="text" className="form-control" id="username" required={true}>
-                                </input>
+                            <input type="text" className="form-control" id="username" required={true}>
+                            </input>
                         </div>
                         <div style={{marginTop:"20px",textAlign:"left"}}>
                             <label>Password</label>
                             <input type="password" className="form-control" id="password" required={true}></input>
                         </div>
                         <div style={{marginTop:"20px",textAlign:"center"}}>
-                            <button type="submit" id="loginBtn" onClick={saveInfo} className="btn" style={{marginTop:"10px",backgroundColor:"#A2F7BF",color:"black"}}>Login</button>
+                            <button type="button" id="loginBtn" onClick={saveInfo} className="btn" style={{marginTop:"10px",backgroundColor:"#A2F7BF",color:"black"}}>Login</button>
                         </div>
                     </form>
                     <hr></hr>

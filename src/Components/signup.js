@@ -1,47 +1,70 @@
 function Signup(){
-    let obj = {
-        first: "",
-        last:"",
-        address:"",
-        email:"",
-        age:"",
-    };
-    // fetch("http://a6b5-103-156-19-229.ngrok.io/getDetails",{
-    //     method:"GET",
-    // })
-    //     .then((response) => response.json())
-    //     .then((responseData)=>{
-    //         document.getElementById("firstName").value = responseData[0].username;
-    //         document.getElementById("lastName").value = responseData[0].username;
-    //         document.getElementById("address").value = responseData[0].id;
-    //         document.getElementById("contactNo").value = responseData[0].role;
-    //         document.getElementById("age").value = responseData[0].id;
-    //     })
+
     function registerUser(){
-        let first = document.getElementById("firstName").value
-        let last = document.getElementById("lastName").value
-        let addr = document.getElementById("address").value
-        let contact = document.getElementById("contactNo").value
-        let age = document.getElementById("age").value
-        let person = {
-            firstName:first,
-            lastName:last,
-            address:addr,
-            contactNo:contact,
-            age:age
+        let obj = {
+            name: "",
+            rollno:"",
+            emailId:"",
+            branch:"",
+            programName:"",
+            password:""
+        };
+        let fullN = document.getElementById("fullName").value;
+        if(fullN == '' || fullN == ' ')
+        {
+            alert("Invalid Name!!!");
+            return;
         }
-        alert(person.firstName);
-        alert(person.lastName);
-        alert(person.age);
-        alert(person.address);
-        alert(person.contactNo);
-        document.getElementById("firstName").disabled=true;
-        document.getElementById("lastName").disabled=true;
-        document.getElementById("address").disabled=true;
-        document.getElementById("contactNo").disabled=true;
-        document.getElementById("age").disabled=true;
-        document.getElementById("editBtn").style.display="block";
-        document.getElementById("saveBtn").style.display="none";
+        let roll = document.getElementById("rollNo").value;
+        if(fullN == '' || fullN == ' ')
+        {
+            alert("Invalid Name!!!");
+            return;
+        }
+        let email = document.getElementById("email").value;
+        if(email == '' || email == ' ')
+        {
+            alert("Invalid Email!!!");
+            return;
+        }
+        let branch = document.getElementById("branch").value;
+        if(branch == 0)
+        {
+            alert("Please Select Valid Branch!!!");
+            return;
+        }
+        let pName = document.getElementById("programName").value;
+        if(pName == 0)
+        {
+            alert("Please Select Valid Program Name!!!");
+            return;
+        }
+        let pswd = document.getElementById("password").value;
+        if(pswd == '' || pswd == ' ')
+        {
+            alert("Invalid Password!!!");
+            return;
+        }
+        obj.name = fullN;
+        obj.rollno = roll;
+        obj.emailId = email;
+        obj.branch = branch == 1?"CSE":"ECE";
+        obj.programName = pName == 1?"MTECH":"IMTECH";
+        obj.password = pswd;
+        console.log('pName:'+obj.programName);
+        console.log('Branch:'+obj.branch);
+        fetch("http://localhost:5050/student/register",{
+            method:"POST",
+            body:JSON.stringify(obj),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            }
+        })
+            .then((response) => response.json())
+            .then((responseData)=>{
+                console.log(responseData);
+                window.location.href="/login";
+            })
     }
     return <>
         <div>
@@ -68,32 +91,36 @@ function Signup(){
                         </div>
                         <div style={{marginTop:"10px",textAlign:"left"}}>
                             <label>Name</label>
-                            <input type="text" className="form-control" id="fullName">
+                            <input type="text" className="form-control" id="fullName" required={true}>
                             </input>
                         </div>
                         <div style={{marginTop:"10px",textAlign:"left"}}>
                             <label>Roll No</label>
-                            <input type="text" className="form-control" id="rollNo"></input>
+                            <input type="text" className="form-control" id="rollNo" required={true}></input>
                         </div>
                         <div style={{marginTop:"10px",textAlign:"left"}}>
                             <label>Email Id</label>
-                            <input type="text" className="form-control" id="email"></input>
+                            <input type="text" className="form-control" id="email" required={true}></input>
                         </div>
                         <div style={{marginTop:"10px",textAlign:"left"}}>
                             <label>Program Name</label>
-                            <select className="form-control">
-                                <option>--Select--</option>
-                                <option>MTECH</option>
-                                <option>IMTECH</option>
+                            <select className="form-control" id="programName">
+                                <option value="0">--Select--</option>
+                                <option value="1">MTECH</option>
+                                <option value="2">IMTECH</option>
                             </select>
                         </div>
                         <div style={{marginTop:"10px",textAlign:"left"}}>
                             <label>Branch Name</label>
-                            <select className="form-control">
-                                <option>--Select--</option>
-                                <option>CSE</option>
-                                <option>ECE</option>
+                            <select className="form-control" id="branch">
+                                <option value="0">--Select--</option>
+                                <option value="1">CSE</option>
+                                <option value="2">ECE</option>
                             </select>
+                        </div>
+                        <div style={{marginTop:"10px",textAlign:"left"}}>
+                            <label>Password</label>
+                            <input type="password" className="form-control" id="password" required={true}></input>
                         </div>
                         <div style={{marginTop:"20px",textAlign:"center"}}>
                             <button type="button" id="saveBtn" onClick={registerUser} className="btn" style={{marginTop:"10px",backgroundColor:"#A2F7BF",color:"black"}}>Register</button>

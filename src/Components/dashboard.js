@@ -1,32 +1,55 @@
 function Dashboard(){
-	// fetch("http://localhost:8083/patientDetails/1",{
-	// 	method:"GET",
-	// })
-	// 	.then((response) => response.json())
-	// 	.then((responseData)=>{
-	// 		console.log(responseData);
-	// 		document.getElementById("patientsList").innerHTML='';
-	// 		let sz = responseData.length;
-	// 		console.log(sz);
-	// 		let html = '';
-	// 		for(let i=0;i<sz;i++)
-	// 		{
-	// 			let row = '';
-	// 			if(i%2==0)
-	// 			{
-	// 				row = '<a type="button" href="/patientTracker?id='+responseData[i].pid+'" class="list-group-item list-group-item-action" style="background-color:lightgreen;">'+responseData[i].username+
-	// 					'</a>';
-	// 			}
-	// 			else
-	// 			{
-	// 				row = '<a type="button" href="/patientTracker?id='+responseData[i].pid+'" class="list-group-item list-group-item-action" style="background-color:white;">'+responseData[i].username+
-	// 					'</a>';
-	// 			}
-	// 			html=html+row;
-	// 		}
-	// 		document.getElementById("patientsList").innerHTML = html;
-	// 	})
-
+	function sendMail()
+	{
+		alert(1);
+	}
+	fetch("http://localhost:5050/travel/getDetails",{
+		method:"GET",
+	})
+		.then((response) => response.json())
+		.then((responseData)=>{
+			console.log(responseData);
+			document.getElementById("travelList").innerHTML='';
+			let sz = responseData.length;
+			console.log(sz);
+			let html = '';
+			for(let i=0;i<sz;i++)
+			{
+				let row = '';
+				if(i%2==0)
+				{
+					row = '<tr style="background-color:lavender;">' +
+						'<td>'+ responseData[i].name +'</td>' +
+						'<td>'+ responseData[i].rollno +'</td>' +
+						'<td>'+ responseData[i].programName+'</td>' +
+						'<td>'+ responseData[i].branch +'</td>' +
+						'<td>' +
+						'28/4/2021' +
+						'</td>' +
+						'<td>' +
+						'<button type="button" class="btn" onclick="sendMail()" style="background-color:#52595D;color:white">Ping</button>' +
+						'</td>' +
+						'</tr>';
+				}
+				else
+				{
+					row = '<tr style="background-color:azure;">' +
+						'<td>'+ responseData[i].name +'</td>' +
+						'<td>'+ responseData[i].rollno +'</td>' +
+						'<td>'+ responseData[i].programName+'</td>' +
+						'<td>'+ responseData[i].branch +'</td>' +
+						'<td>' +
+						'28/4/2021' +
+						'</td>' +
+						'<td>' +
+						'<button type="button" class="btn" onClick={sendMail} style="background-color:#52595D;color:white">Ping</button>' +
+						'</td>' +
+						'</tr>';
+				}
+				html=html+row;
+			}
+			document.getElementById("travelList").innerHTML = html;
+		})
 
 	return <>
 		<div>
@@ -87,148 +110,29 @@ function Dashboard(){
 					<div className="table-responsive" id="patientsList" style={{marginTop:"40px"}}>
 						<table className="table table-bordered border border-dark border-1 align-middle">
 							<thead>
-								<tr>
-									<th>
-										Name
-									</th>
-									<th>
-										Roll No
-									</th>
-									<th>
-										Program Type
-									</th>
-									<th>
-										Branch
-									</th>
-									<th>
-										Date
-									</th>
-									<th>
-										#
-									</th>
-								</tr>
+							<tr>
+								<th>
+									Name
+								</th>
+								<th>
+									Roll No
+								</th>
+								<th>
+									Program Type
+								</th>
+								<th>
+									Branch
+								</th>
+								<th>
+									Date
+								</th>
+								<th>
+									#
+								</th>
+							</tr>
 							</thead>
-							<tbody>
-								<tr style={{backgroundColor:"lavender"}}>
-									<td>
-										Divyanshu Vijay
-									</td>
-									<td>
-										MT2021043
-									</td>
-									<td>
-										MTECH
-									</td>
-									<td>
-										CSE
-									</td>
-									<td>
-										28/4/2021
-									</td>
-									<td>
-										<button type="button" className="btn" style={{backgroundColor:"#52595D",color:"white"}}>Ping</button>
-									</td>
-								</tr>
-								<tr style={{backgroundColor:"azure"}}>
-									<td>
-										Divyanshu Vijay
-									</td>
-									<td>
-										MT2021043
-									</td>
-									<td>
-										MTECH
-									</td>
-									<td>
-										CSE
-									</td>
-									<td>
-										28/4/2021
-									</td>
-									<td>
-										<button type="button" className="btn" style={{backgroundColor:"#52595D",color:"white"}}>Ping</button>
-									</td>
-								</tr>
-								<tr style={{backgroundColor:"lavender"}}>
-									<td>
-										Divyanshu Vijay
-									</td>
-									<td>
-										MT2021043
-									</td>
-									<td>
-										MTECH
-									</td>
-									<td>
-										CSE
-									</td>
-									<td>
-										28/4/2021
-									</td>
-									<td>
-										<button type="button" className="btn border-dark" style={{backgroundColor:"#52595D",color:"white"}}>Ping</button>
-									</td>
-								</tr>
-								<tr style={{backgroundColor:"azure"}}>
-									<td>
-										Divyanshu Vijay
-									</td>
-									<td>
-										MT2021043
-									</td>
-									<td>
-										MTECH
-									</td>
-									<td>
-										CSE
-									</td>
-									<td>
-										28/4/2021
-									</td>
-									<td>
-										<button type="button" className="btn" style={{backgroundColor:"#52595D",color:"white"}}>Ping</button>
-									</td>
-								</tr>
-								<tr style={{backgroundColor:"lavender"}}>
-									<td>
-										Divyanshu Vijay
-									</td>
-									<td>
-										MT2021043
-									</td>
-									<td>
-										MTECH
-									</td>
-									<td>
-										CSE
-									</td>
-									<td>
-										28/4/2021
-									</td>
-									<td>
-										<button type="button" className="btn" style={{backgroundColor:"#52595D",color:"white"}}>Ping</button>
-									</td>
-								</tr>
-								<tr style={{backgroundColor:"azure"}}>
-									<td>
-										Divyanshu Vijay
-									</td>
-									<td>
-										MT2021043
-									</td>
-									<td>
-										MTECH
-									</td>
-									<td>
-										CSE
-									</td>
-									<td>
-										28/4/2021
-									</td>
-									<td>
-										<button type="button" className="btn" style={{backgroundColor:"#52595D",color:"white"}}>Ping</button>
-									</td>
-								</tr>
+							<tbody id="travelList">
+
 							</tbody>
 
 						</table>
