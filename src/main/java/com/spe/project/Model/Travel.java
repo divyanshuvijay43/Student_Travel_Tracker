@@ -12,12 +12,12 @@ public class Travel {
     private String username;
 
     @Column
-    private Date date;
+    private LocalDate date;
 
     @Column(columnDefinition = "VARCHAR(20) CHECK (status in ('Departing', 'Arriving'))")
     private String status;
 
-    public Travel(String username, Date date, String status) {
+    public Travel(String username, LocalDate date, String status) {
         this.username = username;
         this.date = date;
         this.status = status;
@@ -35,11 +35,11 @@ public class Travel {
         this.username = username;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
