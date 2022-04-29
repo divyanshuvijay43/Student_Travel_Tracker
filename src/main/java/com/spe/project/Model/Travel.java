@@ -8,10 +8,6 @@ import java.util.Date;
 public class Travel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "travel_id")
-    private Long id;
-
     @Column()
     private String username;
 
@@ -29,14 +25,6 @@ public class Travel {
 
     public Travel() {
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {

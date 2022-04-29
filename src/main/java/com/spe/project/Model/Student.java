@@ -27,11 +27,11 @@ public class Student {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "username", referencedColumnName = "roll_num")
-    private List<Travel> travelList = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(referencedColumnName = "username")
+    private Travel travelList;
 
-    public Student(String id, String name, String email, String program, String branch, String password, List<Travel> travelList) {
+    public Student(String id, String name, String email, String program, String branch, String password, Travel travelList) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -93,11 +93,11 @@ public class Student {
         this.password = password;
     }
 
-    public List<Travel> getTravelList() {
+    public Travel getTravelList() {
         return travelList;
     }
 
-    public void setTravelList(List<Travel> travelList) {
+    public void setTravelList(Travel travelList) {
         this.travelList = travelList;
     }
 }
