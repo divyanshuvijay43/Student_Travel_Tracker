@@ -29,3 +29,15 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: divyanshuvijay43/student_front:latest
+
+
+  deploy:
+
+      needs: build
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/workflows/actions/ansible
+      env:
+         SSH_USER: azureuser
