@@ -7,8 +7,8 @@
     - name: Go to docker-compose
       command: docker-compose pull
       args:
-        chdir: docker-compose/
+        chdir: DockerCompose/
     - name: Runnig Docker-compose
       command: docker-compose up --build -d
       args:
-        chdir: docker-compose/
+        chdir: DockerCompose/
