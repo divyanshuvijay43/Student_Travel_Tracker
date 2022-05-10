@@ -1,7 +1,7 @@
 function Login(){
     function saveInfo(){
         let obj = {
-            email:"",
+            username:"",
             password:"",
         };
         let usrname = document.getElementById("username").value
@@ -16,19 +16,23 @@ function Login(){
             alert("Invalid password.Try again!!!");
             return;
         }
-        obj.email = usrname;
+        obj.username = usrname;
         obj.password = psswd;
-        fetch("http://localhost:5050/student/login",{
+        fetch("http://localhost:8080/student/login",{
             method:"POST",
             body: JSON.stringify(obj),
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
-            }
+                id: obj.username,
+                pwd: obj.password,
+            },
         })
             .then((response)=>{
                 if(response.status == 200)
                 {
-                    return response.json();
+                    localStorage.setItem("username", obj.username);
+                    //console.log(response);
+                    navigate("/dashboard");
                 }
                 else
                 {
@@ -37,16 +41,9 @@ function Login(){
                     return -1;
                 }
             })
-            .then(function(data){
-                if(data!=-1)
-                {
-                    console.log(data);
-                    window.location.href="/dashboard";
-                }
-            })
     }
     function signUp(){
-        window.location.href="/signup";
+        navigate("/signup");
     }
     return <>
         <div>
@@ -72,7 +69,7 @@ function Login(){
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYPRLSISP2uoEdGxNPVFrz02gI2KWiJ_VwNA&usqp=CAU" alt="Avatar" style={{borderRadius:"50%"}}></img>
                         </div>
                         <div style={{marginTop:"20px",textAlign:"left"}}>
-                            <label>Email Id</label>
+                            <label>Username</label>
                             <input type="text" className="form-control" id="username" required={true}>
                             </input>
                         </div>
