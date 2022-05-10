@@ -1,6 +1,9 @@
 /* eslint-disable */
 
+import { useNavigate } from "react-router-dom";
+
 function Signup() {
+  let navigate = useNavigate();
   function registerUser() {
     let obj = {
       name: "",
@@ -48,7 +51,7 @@ function Signup() {
     obj.password = pswd;
     console.log("pName:" + obj.program);
     console.log("Branch:" + obj.branch);
-    
+
     fetch("http://localhost:8080/register", {
       method: "POST",
       body: JSON.stringify(obj),
@@ -59,7 +62,7 @@ function Signup() {
       .then((response) => response.json())
       .then((responseData) => {
         console.log(responseData);
-        window.location.href("/login")
+        window.location.href("/login");
       });
   }
   return (
@@ -84,8 +87,11 @@ function Signup() {
                   id-type="button"
                   className="btn btn-success"
                   style={{ backgroundColor: "white", color: "black" }}
+                  onClick={() => {
+                    navigate("/login");
+                  }}
                 >
-                  Logout
+                  Login
                 </button>
               </span>
             </div>

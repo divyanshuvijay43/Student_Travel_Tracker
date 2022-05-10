@@ -11,7 +11,7 @@ export default function Travel() {
   let navigate = useNavigate();
 
   const onClickSave = () => {
-    body.username = document.getElementById("username").value;
+    body.username = localStorage.getItem("username");
     body.date = document.getElementById("date").value;
     body.status = document.getElementById("status").value;
 
@@ -23,7 +23,7 @@ export default function Travel() {
       },
     });
 
-    navigate("/dashboard");
+    navigate("/addTravelDetail");
   };
 
   return (
@@ -47,8 +47,9 @@ export default function Travel() {
                 id-type="button"
                 className="btn btn-outline-success"
                 style={{ backgroundColor: "white", color: "black" }}
+                onClick={() => navigate("/dashboard")}
               >
-                Add
+                Dashboard
               </button>
             </span>
           </div>
@@ -56,15 +57,7 @@ export default function Travel() {
       </div>
       <div style={{ width: "30%", margin: "10px auto" }}>
         <form>
-          <div className="form-group" style={{ marginBottom: "30px" }}>
-            <label>Username: </label>
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              required={true}
-            />
-          </div>
+          <div className="form-group" style={{ marginBottom: "30px" }}></div>
           <div className="form-group" style={{ marginBottom: "30px" }}>
             <label>Date of Travel: </label>
             <input

@@ -22,58 +22,60 @@ function Dashboard() {
       let html = "";
       for (let i = 0; i < sz; i++) {
         let row = "";
-        if (i % 2 === 0) {
-          row =
-            '<tr style="background-color:lavender;">' +
-            "<td>" +
-            responseData[i].name +
-            "</td>" +
-            "<td>" +
-            responseData[i].id +
-            "</td>" +
-            "<td>" +
-            responseData[i].program +
-            "</td>" +
-            "<td>" +
-            responseData[i].branch +
-            "</td>" +
-            "<td>" +
-            responseData[i].travelList.date +
-            "</td>" +
-            "<td>" +
-            responseData[i].travelList.status +
-            "</td>" +
-            "<td>" +
-            '<button type="button" class="btn" onclick="sendMail()" style="background-color:#52595D;color:white">Ping</button>' +
-            "</td>" +
-            "</tr>";
-        } else {
-          row =
-            '<tr style="background-color:azure;">' +
-            "<td>" +
-            responseData[i].name +
-            "</td>" +
-            "<td>" +
-            responseData[i].id +
-            "</td>" +
-            "<td>" +
-            responseData[i].program +
-            "</td>" +
-            "<td>" +
-            responseData[i].branch +
-            "</td>" +
-            "<td>" +
-            responseData[i].travelList.date +
-            "</td>" +
-            "<td>" +
-            responseData[i].travelList.status +
-            "</td>" +
-            "<td>" +
-            '<button type="button" class="btn" onClick={sendMail} style="background-color:#52595D;color:white">Ping</button>' +
-            "</td>" +
-            "</tr>";
+        if (responseData[i].travelList) {
+          if (i % 2 === 0) {
+            row =
+              '<tr style="background-color:lavender;">' +
+              "<td>" +
+              responseData[i].name +
+              "</td>" +
+              "<td>" +
+              responseData[i].id +
+              "</td>" +
+              "<td>" +
+              responseData[i].program +
+              "</td>" +
+              "<td>" +
+              responseData[i].branch +
+              "</td>" +
+              "<td>" +
+              responseData[i].travelList.date +
+              "</td>" +
+              "<td>" +
+              responseData[i].travelList.status +
+              "</td>" +
+              "<td>" +
+              '<button type="button" class="btn" onclick="sendMail()" style="background-color:#52595D;color:white">Ping</button>' +
+              "</td>" +
+              "</tr>";
+          } else {
+            row =
+              '<tr style="background-color:azure;">' +
+              "<td>" +
+              responseData[i].name +
+              "</td>" +
+              "<td>" +
+              responseData[i].id +
+              "</td>" +
+              "<td>" +
+              responseData[i].program +
+              "</td>" +
+              "<td>" +
+              responseData[i].branch +
+              "</td>" +
+              "<td>" +
+              responseData[i].travelList.date +
+              "</td>" +
+              "<td>" +
+              responseData[i].travelList.status +
+              "</td>" +
+              "<td>" +
+              '<button type="button" class="btn" onClick={sendMail} style="background-color:#52595D;color:white">Ping</button>' +
+              "</td>" +
+              "</tr>";
+          }
+          html = html + row;
         }
-        html = html + row;
       }
       document.getElementById("travelList").innerHTML = html;
     });
