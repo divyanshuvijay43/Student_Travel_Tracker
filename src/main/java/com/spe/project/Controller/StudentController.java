@@ -4,12 +4,16 @@ import com.spe.project.Model.Student;
 import com.spe.project.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class StudentController {
+    Logger logger = LoggerFactory.getLogger(StudentController.class);
+    
     @Autowired
     private StudentRepo repo;
 
@@ -18,8 +22,17 @@ public class StudentController {
         return "Welcome to home page!";
     }
 
-    @GetMapping("/students")
-    public List<Student> getStudents(){
+    @GetMapping ("/students")
+    public Student getStudents(@RequestHeader String id, @RequestHeader String pwd){
+        Student student = repo.findByUsername(id, pwd);
+        if(student.getName() == null){
+            return null;
+        }
+        return student;
+    }
+    
+    @GetMapping("/studentDetails")
+    public List<Student> getAllStudents(){
         return repo.findAll();
     }
 
