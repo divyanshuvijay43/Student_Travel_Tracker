@@ -101,6 +101,7 @@ function Dashboard() {
                   className="btn btn-success"
                   style={{ backgroundColor: "white", color: "black" }}
                   onClick={() => {
+                    localStorage.removeItem("username");
                     navigate("/login");
                   }}
                 >
