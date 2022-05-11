@@ -2,13 +2,14 @@ import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  // function sendMail() {
-  //   alert(1);
-  // }
+
+  function sendMail() {
+    alert(1);
+  }
 
   const navigate = useNavigate();
 
-  fetch("http://localhost:5050/travel/getDetails", {
+  fetch("http://52.140.50.10:5050/travel/getDetails", {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -54,7 +55,7 @@ function Dashboard() {
             stat +
             "</td>" +
             "<td>" +
-            '<button type="button" class="btn" onclick={sendMail()} style="background-color:#52595D;color:white">Ping</button>' +
+            '<a href="/connectBuddy?rollno='+ responseData[i].rollno +'" class="btn" style="background-color:#52595D;color:white">Ping</a>' +
             "</td>" +
             "</tr>";
         } else {
@@ -79,7 +80,7 @@ function Dashboard() {
             stat +
             "</td>" +
             "<td>" +
-            '<button type="button" class="btn" onClick={sendMail} style="background-color:#52595D;color:white">Ping</button>' +
+            '<a href="/connectBuddy?rollno='+ responseData[i].rollno +'" class="btn" style="background-color:#52595D;color:white">Ping</a>' +
             "</td>" +
             "</tr>";
         }

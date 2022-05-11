@@ -5,6 +5,8 @@ import Signup from "./Components/signup";
 import Dashboard from "./Components/dashboard";
 import Info from "./Components/Info";
 import Travel from "./Components/addTravelinfo";
+import Connect from "./Components/connectbuddy";
+import Welcome from "./Components/welcome";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/editProfile" element={<Info />} />
           <Route path="/addTravelDetail" element={<Travel />} />
+          <Route path="/connectBuddy" element={<Connect />} />
+          <Route path="/" element={<Welcome />} />
         </Routes>
       </BrowserRouter>
     </div>

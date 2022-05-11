@@ -19,7 +19,7 @@ function Login() {
     }
     obj.email = usrname;
     obj.password = psswd;
-  fetch("http://localhost:5050/student/login",{
+  fetch("http://52.140.50.10:5050/student/login",{
       method:"POST",
       body: JSON.stringify(obj),
       headers: {
@@ -41,17 +41,29 @@ function Login() {
       .then(function(data){
           if(data!=-1)
           {
-              console.log(data);
               localStorage.setItem("username", obj.email);
-              fetch("http://localhost:5050/student/getRole/"+data,{
+              fetch("http://52.140.50.10:5050/student/getRole/"+data,{
                   method:"GET"
               })
                   .then((response) => response.json())
                   .then((responseData) => {
-                      console.log(responseData);
                       if(responseData == 1)
                       {
-                          window.location.href = "/dashboard";
+                          fetch("http://52.140.50.10:5050/travel/hasTravelled/"+obj.email,{
+                              method:"GET"
+                          })
+                          .then((data) => data.json())
+                          .then((resData) => {
+                              console.log(resData);
+                              if(resData == true)
+                              {
+                                window.location.href = "/dashboard";
+                              }
+                              else
+                              {
+                                  window.location.href = "/addTravelDetail";
+                              }
+                          });
                       }
                       else
                       {

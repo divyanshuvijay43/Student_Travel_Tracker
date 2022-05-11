@@ -15,7 +15,7 @@ export default function Travel() {
     body.date = document.getElementById("date").value;
     body.status = document.getElementById("status").value;
 
-    fetch("http://localhost:5050/student/getInfo/"+body.username,{
+    fetch("http://52.140.50.10:5050/student/getInfo/"+body.username,{
       method:"GET"
     })
         .then((response)=>{
@@ -44,7 +44,7 @@ export default function Travel() {
                 StudentId:stuId,
                 journeyType:parseInt(body.status)
               }
-              fetch("http://localhost:5050/travel/addDetails", {
+              fetch("http://52.140.50.10:5050/travel/addDetails", {
                 method: "POST",
                 body: JSON.stringify(travelDetail),
                 headers: {
