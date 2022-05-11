@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
   // function sendMail() {
   //   alert(1);
   // }
+
   const navigate = useNavigate();
 
-  fetch("http://localhost:8080/studentDetails", {
+  fetch("http://localhost:5050/travel/getDetails", {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -22,60 +23,67 @@ function Dashboard() {
       let html = "";
       for (let i = 0; i < sz; i++) {
         let row = "";
-        if (responseData[i].travelList) {
-          if (i % 2 === 0) {
-            row =
-              '<tr style="background-color:lavender;">' +
-              "<td>" +
-              responseData[i].name +
-              "</td>" +
-              "<td>" +
-              responseData[i].id +
-              "</td>" +
-              "<td>" +
-              responseData[i].program +
-              "</td>" +
-              "<td>" +
-              responseData[i].branch +
-              "</td>" +
-              "<td>" +
-              responseData[i].travelList.date +
-              "</td>" +
-              "<td>" +
-              responseData[i].travelList.status +
-              "</td>" +
-              "<td>" +
-              '<button type="button" class="btn" onclick="sendMail()" style="background-color:#52595D;color:white">Ping</button>' +
-              "</td>" +
-              "</tr>";
-          } else {
-            row =
-              '<tr style="background-color:azure;">' +
-              "<td>" +
-              responseData[i].name +
-              "</td>" +
-              "<td>" +
-              responseData[i].id +
-              "</td>" +
-              "<td>" +
-              responseData[i].program +
-              "</td>" +
-              "<td>" +
-              responseData[i].branch +
-              "</td>" +
-              "<td>" +
-              responseData[i].travelList.date +
-              "</td>" +
-              "<td>" +
-              responseData[i].travelList.status +
-              "</td>" +
-              "<td>" +
-              '<button type="button" class="btn" onClick={sendMail} style="background-color:#52595D;color:white">Ping</button>' +
-              "</td>" +
-              "</tr>";
-          }
-          html = html + row;
+        let journeyType = responseData[i].journeyType;
+        let stat = '';
+        if(journeyType == 1)
+        {
+          stat = '<button type="button" class="btn btn-primary" style="color:white">Arriving</button>';
         }
+        else {
+          stat = '<button type="button" class="btn btn-warning" style="color:black">Departing</button>';
+        }
+        if (i % 2 === 0) {
+          row =
+            '<tr style="background-color:lavender;">' +
+            "<td>" +
+            responseData[i].name +
+            "</td>" +
+            "<td>" +
+            responseData[i].rollno +
+            "</td>" +
+            "<td>" +
+            responseData[i].programName +
+            "</td>" +
+            "<td>" +
+            responseData[i].branch +
+            "</td>" +
+            "<td>" +
+            responseData[i].travelDate +
+            "</td>" +
+            "<td>" +
+            stat +
+            "</td>" +
+            "<td>" +
+            '<button type="button" class="btn" onclick={sendMail()} style="background-color:#52595D;color:white">Ping</button>' +
+            "</td>" +
+            "</tr>";
+        } else {
+          row =
+            '<tr style="background-color:azure;">' +
+            "<td>" +
+            responseData[i].name +
+            "</td>" +
+            "<td>" +
+            responseData[i].rollno +
+            "</td>" +
+            "<td>" +
+            responseData[i].programName +
+            "</td>" +
+            "<td>" +
+            responseData[i].branch +
+            "</td>" +
+            "<td>" +
+            responseData[i].travelDate+
+            "</td>" +
+            "<td>" +
+            stat +
+            "</td>" +
+            "<td>" +
+            '<button type="button" class="btn" onClick={sendMail} style="background-color:#52595D;color:white">Ping</button>' +
+            "</td>" +
+            "</tr>";
+        }
+        html = html + row;
       }
       document.getElementById("travelList").innerHTML = html;
     });

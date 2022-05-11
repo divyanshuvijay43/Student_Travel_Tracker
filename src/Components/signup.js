@@ -1,69 +1,69 @@
-/* eslint-disable */
-
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
+
   let navigate = useNavigate();
   function registerUser() {
-    let obj = {
-      name: "",
-      id: "",
-      email: "",
-      branch: "",
-      program: "",
-      password: "",
-    };
-    let fullN = document.getElementById("fullName").value;
-    if (fullN == "" || fullN == " ") {
-      alert("Invalid Name!!!");
-      return;
-    }
-    let roll = document.getElementById("rollNo").value;
-    if (fullN == "" || fullN == " ") {
-      alert("Invalid Name!!!");
-      return;
-    }
-    let email = document.getElementById("email").value;
-    if (email == "" || email == " ") {
-      alert("Invalid Email!!!");
-      return;
-    }
-    let branch = document.getElementById("branch").value;
-    if (branch == 0) {
-      alert("Please Select Valid Branch!!!");
-      return;
-    }
-    let pName = document.getElementById("programName").value;
-    if (pName == 0) {
-      alert("Please Select Valid Program Name!!!");
-      return;
-    }
-    let pswd = document.getElementById("password").value;
-    if (pswd == "" || pswd == " ") {
-      alert("Invalid Password!!!");
-      return;
-    }
-    obj.name = fullN;
-    obj.id = roll;
-    obj.email = email;
-    obj.branch = branch == 1 ? "CSE" : "ECE";
-    obj.program = pName == 1 ? "MTech" : "iMTech";
-    obj.password = pswd;
-    console.log("pName:" + obj.program);
-    console.log("Branch:" + obj.branch);
+      let obj = {
+        name: "",
+        rollno: "",
+        emailId: "",
+        branch: "",
+        programName: "",
+        password: "",
+        role:0
+      };
+      let fullN = document.getElementById("fullName").value;
+      if (fullN == "" || fullN == " ") {
+        alert("Invalid Name!!!");
+        return;
+      }
+      let roll = document.getElementById("rollNo").value;
+      if (roll == "" || roll == " ") {
+        alert("Invalid Name!!!");
+        return;
+      }
+      let email = document.getElementById("email").value;
+      if (email == "" || email == " ") {
+        alert("Invalid Email!!!");
+        return;
+      }
+      let branch = document.getElementById("branch").value;
+      if (branch == 0) {
+        alert("Please Select Valid Branch!!!");
+        return;
+      }
+      let pName = document.getElementById("programName").value;
+      if (pName == 0) {
+        alert("Please Select Valid Program Name!!!");
+        return;
+      }
+      let pswd = document.getElementById("password").value;
+      if (pswd == "" || pswd == " ") {
+        alert("Invalid Password!!!");
+        return;
+      }
+      obj.name = fullN;
+      obj.emailId = email;
+      obj.rollno = roll;
+      obj.branch = branch == 1 ? "CSE" : "ECE";
+      obj.programName = pName == 1 ? "MTech" : "iMTech";
+      obj.password = pswd;
+      console.log("pName:" + obj.programName);
+      console.log("Branch:" + obj.branch);
 
-    fetch("http://localhost:8080/register", {
-      method: "POST",
-      body: JSON.stringify(obj),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log(responseData);
-        window.location.href("/login");
-      });
+      fetch("http://localhost:5050/student/register", {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          console.log(responseData);
+          window.location.href = "/login";
+        });
   }
   return (
     <>
@@ -107,7 +107,6 @@ function Signup() {
           }}
         >
           <div className="card-body">
-            <form className="row" style={{ padding: "20px" }}>
               <div style={{ textAlign: "center" }}>
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYPRLSISP2uoEdGxNPVFrz02gI2KWiJ_VwNA&usqp=CAU"
@@ -181,7 +180,6 @@ function Signup() {
                   Register
                 </button>
               </div>
-            </form>
           </div>
         </div>
       </div>

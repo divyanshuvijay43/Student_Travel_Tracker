@@ -15,13 +15,49 @@ export default function Travel() {
     body.date = document.getElementById("date").value;
     body.status = document.getElementById("status").value;
 
-    fetch("http://localhost:8080/save", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    fetch("http://localhost:5050/student/getInfo/"+body.username,{
+      method:"GET"
+    })
+        .then((response)=>{
+          if(response != null)
+          {
+            return response.json();
+          }
+          else
+          {
+            alert("Student with entered rollNo doesn't exist!!!");
+            return -1;
+          }
+        })
+        .then(function(data){
+            console.log(data);
+            let stuId = data.id;
+            console.log(stuId);
+            if(data!=-1)
+            {
+              let travelDetail = {
+                name : data.name,
+                rollno:data.rollno,
+                branch:data.branch,
+                programName:data.programName,
+                travelDate:body.date,
+                StudentId:stuId,
+                journeyType:parseInt(body.status)
+              }
+              fetch("http://localhost:5050/travel/addDetails", {
+                method: "POST",
+                body: JSON.stringify(travelDetail),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                },
+              })
+                  .then((response) => response.json())
+                  .then((responseData) => {
+                    console.log(responseData);
+                    window.location.href = "/dashboard";
+                  });
+            }
+        });
 
     navigate("/addTravelDetail");
   };
@@ -56,8 +92,6 @@ export default function Travel() {
         </nav>
       </div>
       <div style={{ width: "30%", margin: "10px auto" }}>
-        <form>
-          <div className="form-group" style={{ marginBottom: "30px" }}></div>
           <div className="form-group" style={{ marginBottom: "30px" }}>
             <label>Date of Travel: </label>
             <input
@@ -70,8 +104,8 @@ export default function Travel() {
           <div className="form-group" style={{ marginBottom: "30px" }}>
             <label>Status: </label>
             <select className="form-control" id="status">
-              <option>Arriving</option>
-              <option>Departing</option>
+              <option value="1">Arriving</option>
+              <option value="2">Departing</option>
             </select>
           </div>
           <button
@@ -82,7 +116,6 @@ export default function Travel() {
           >
             Submit
           </button>
-        </form>
       </div>
     </div>
   );
