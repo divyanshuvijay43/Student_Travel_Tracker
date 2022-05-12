@@ -14,7 +14,7 @@ function Connectbuddy()
     function sendMail()
     {
         let rollno = document.getElementById("username").value;
-        fetch("http://52.140.50.10:5050/travel/sendMail/"+rollno+"/"+localStorage.getItem("username"),{
+        fetch("http://20.219.111.158:5050/travel/sendMail/"+rollno+"/"+localStorage.getItem("username"),{
             method:"POST",
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
