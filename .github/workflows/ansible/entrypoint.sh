@@ -2,7 +2,7 @@
 echo "Ansible Entrypoint"
 
 echo "[azure]" >> /hosts
-echo "52.140.50.10" >> /hosts
+echo "20.219.111.158" >> /hosts
 
 echo "[all:vars]" >> /hosts
 echo "ansible_connection=ssh" >> /hosts
