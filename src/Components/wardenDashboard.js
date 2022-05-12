@@ -227,7 +227,7 @@ function WardenDashboard() {
                             <button
                                 className="btn btn-primary"
                                 style={{ width: "25%", margin: "20px auto 0" }}
-                                // onClick={updateList}
+                                onClick={updateList}
                             >
                                 Search
                             </button>
