@@ -19,7 +19,7 @@ function Login() {
     }
     obj.email = usrname;
     obj.password = psswd;
-  fetch("http://52.140.50.10:5050/student/login",{
+  fetch("http://20.219.111.158:5050/student/login",{
       method:"POST",
       body: JSON.stringify(obj),
       headers: {
@@ -42,14 +42,14 @@ function Login() {
           if(data!=-1)
           {
               localStorage.setItem("username", obj.email);
-              fetch("http://52.140.50.10:5050/student/getRole/"+data,{
+              fetch("http://20.219.111.158:5050/student/getRole/"+data,{
                   method:"GET"
               })
                   .then((response) => response.json())
                   .then((responseData) => {
                       if(responseData == 1)
                       {
-                          fetch("http://52.140.50.10:5050/travel/hasTravelled/"+obj.email,{
+                          fetch("http://20.219.111.158:5050/travel/hasTravelled/"+obj.email,{
                               method:"GET"
                           })
                           .then((data) => data.json())
@@ -67,7 +67,7 @@ function Login() {
                       }
                       else
                       {
-                          alert("You are warden!!!");
+                          window.location.href = "/wardenDashboard";
                       }
                   });
           }

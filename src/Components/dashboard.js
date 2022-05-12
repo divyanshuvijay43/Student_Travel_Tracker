@@ -9,7 +9,7 @@ function Dashboard() {
 
   const navigate = useNavigate();
 
-  fetch("http://52.140.50.10:5050/travel/getDetails", {
+  fetch("http://20.219.111.158:5050/travel/getDetails", {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
@@ -128,38 +128,6 @@ function Dashboard() {
         >
           <div className="card-body">
             <div className="row" style={{ textAlign: "center" }}>
-              <div className="col-3">
-                <label>Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="username"
-                ></input>
-              </div>
-              <div className="col-3">
-                <label>Program Type</label>
-                <select className="form-control">
-                  <option>--Select--</option>
-                  <option>MTECH</option>
-                  <option>IMTECH</option>
-                </select>
-              </div>
-              <div className="col-3">
-                <label>Branch</label>
-                <select className="form-control">
-                  <option>--Select--</option>
-                  <option>CSE</option>
-                  <option>ECE</option>
-                </select>
-              </div>
-              <div className="col-3">
-                <label>Date</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="username"
-                ></input>
-              </div>
               <Link to="/addTravelDetail">
                 <button
                   className="btn btn-success"

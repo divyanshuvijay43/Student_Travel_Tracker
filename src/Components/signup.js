@@ -52,7 +52,7 @@ function Signup() {
       console.log("pName:" + obj.programName);
       console.log("Branch:" + obj.branch);
 
-      fetch("http://52.140.50.10:5050/student/register", {
+      fetch("http://20.219.111.158:5050/student/register", {
         method: "POST",
         body: JSON.stringify(obj),
         headers: {
